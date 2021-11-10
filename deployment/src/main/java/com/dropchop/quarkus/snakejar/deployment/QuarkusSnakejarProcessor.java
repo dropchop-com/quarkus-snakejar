@@ -14,7 +14,6 @@ import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
-import io.quarkus.deployment.builditem.RunTimeConfigurationDefaultBuildItem;
 import io.quarkus.deployment.builditem.ShutdownContextBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.JniRuntimeAccessBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
@@ -57,6 +56,7 @@ class QuarkusSnakejarProcessor {
     //enableLoadOfNativeLibs(reinitialized);
   }
 
+  /*
   private void registerClassesThatAreLoadedThroughReflection(BuildProducer<ReflectiveClassBuildItem> reflectiveClasses,
                                                              LaunchModeBuildItem launchMode) {
     reflectiveClasses.produce(
@@ -145,13 +145,7 @@ class QuarkusSnakejarProcessor {
         )
       );
   }
-
-  @BuildStep
-  public void runtimeDefaultConfig(BuildProducer<RunTimeConfigurationDefaultBuildItem> runTimeConfigurationDefaultBuildItemBuildProducer) {
-    runTimeConfigurationDefaultBuildItemBuildProducer.produce(
-      new RunTimeConfigurationDefaultBuildItem("quarkus.class-loading.parent-first-artifacts", "com.dropchop:snakejar")
-    );
-  }
+  */
 
   @BuildStep
   public void registerBeans(BuildProducer<AdditionalBeanBuildItem> additionalBeanBuildItemProducer) {

@@ -3,7 +3,7 @@ package com.dropchop.quarkus.snakejar.deployment;
 import io.quarkus.builder.item.MultiBuildItem;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
 public final class QuarkusSnakeJarInvokerNameBuildItem extends MultiBuildItem {
 

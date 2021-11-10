@@ -32,9 +32,6 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Properties;
-
-import static com.dropchop.quarkus.snakejar.SnakeJarPropertiesUtil.buildSnakeJarProperties;
 
 class QuarkusSnakejarProcessor {
 

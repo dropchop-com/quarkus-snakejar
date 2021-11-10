@@ -42,7 +42,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
-    <tag>snakejar-1.0.5</tag>
+    <tag>quarkus-snakejar-1.0.0-SNAPSHOT</tag>
   </scm>
 
   <profiles>

@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>pom</packaging>
   <name>Quarkus Snakejar - Parent</name>
   <modules>
@@ -41,7 +41,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
-    <tag>quarkus-snakejar-1.0.2-SNAPSHOT</tag>
+    <tag>quarkus-snakejar-parent-1.0.2</tag>
   </scm>
 
   <profiles>

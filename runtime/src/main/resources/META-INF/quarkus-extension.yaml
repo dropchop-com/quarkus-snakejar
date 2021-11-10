@@ -1,0 +1,13 @@
+name: Quarkus Snakejar
+description: Quarkus Snakejar is an extension that integrates SnakeJar Java library with embedded CPython to Quarkus.
+metadata:
+  keywords:
+    - quarkus-snakejar
+    - snakejar
+    - embedded Python
+    - Python
+    - machine learning
+#  guide: ...
+  categories:
+    - "miscellaneous"
+  status: "preview"

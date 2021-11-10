@@ -20,9 +20,31 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>2.3.0.Final</quarkus.version>
+    <snakejar.version>1.0.6</snakejar.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <version.slf4j>1.7.32</version.slf4j>
   </properties>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>ivlcic</id>
+      <name>Nikola Ivačič</name>
+      <email>nikola.ivacic@dropchop.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
+    <tag>quarkus-snakejar-1.0.0-SNAPSHOT</tag>
+  </scm>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -36,6 +58,11 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${version.slf4j}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.dropchop</groupId>
+        <artifactId>snakejar</artifactId>
+        <version>${snakejar.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

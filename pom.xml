@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Quarkus Snakejar - Parent</name>
   <modules>
@@ -19,7 +19,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>2.3.0.Final</quarkus.version>
-    <snakejar.version>1.0.10</snakejar.version>
+    <snakejar.version>1.0.1</snakejar.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <version.slf4j>1.7.32</version.slf4j>
   </properties>
@@ -41,25 +41,39 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
-    <tag>quarkus-snakejar-1.0.2-SNAPSHOT</tag>
+    <tag>quarkus-snakejar-1.0.1</tag>
   </scm>
 
   <profiles>
     <profile>
-      <id>github</id>
+      <id>maven-central</id>
       <repositories>
         <repository>
           <id>central</id>
           <url>https://repo1.maven.org/maven2</url>
         </repository>
         <repository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/ivlcic/snakejar</url>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <repository>
+          <id>ossrh-snap</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
           <snapshots>
             <enabled>true</enabled>
           </snapshots>
         </repository>
       </repositories>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
       <build>
         <plugins>
           <plugin>
@@ -85,33 +99,8 @@
           </plugin>
         </plugins>
       </build>
-      <distributionManagement>
-        <repository>
-          <id>github</id>
-          <name>GitHub Ivlcic Apache Maven Packages</name>
-          <url>https://maven.pkg.github.com/ivlcic/quarkus-snakejar</url>
-        </repository>
-      </distributionManagement>
     </profile>
   </profiles>
-
-  <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Ivlcic Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ivlcic/quarkus-snakejar</url>
-    </repository>
-    <!--
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-    </repository>
-    -->
-  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>

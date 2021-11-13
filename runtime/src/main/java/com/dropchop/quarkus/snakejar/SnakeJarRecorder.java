@@ -15,21 +15,6 @@ import java.util.function.Supplier;
 @Recorder
 public class SnakeJarRecorder {
 
-  public class InvokerSupplier implements Supplier<Invoker> {
-    private final String name;
-    private final SnakeJarInvokerFactory producer;
-
-    public InvokerSupplier(SnakeJarInvokerFactory producer, String name) {
-      this.producer = producer;
-      this.name = name;
-    }
-
-    @Override
-    public Invoker get() {
-      return this.producer.getSnakeJarInvoker(this.name);
-    }
-  }
-
   private static final Logger LOG = LoggerFactory.getLogger(SnakeJarRecorder.class);
 
   public void registerShutdownTask(ShutdownContext shutdownContext) {
@@ -40,16 +25,9 @@ public class SnakeJarRecorder {
   public Supplier<Invoker> snakeJarInvokerSupplier(String name) {
     LOG.trace("snakeJarInvokerSupplier({})", name);
     SnakeJarInvokerFactory producer = Arc.container().instance(SnakeJarInvokerFactory.class).get();
-
-    /*Supplier<Invoker> supplier = new Supplier<Invoker>() {
-      @Override
-      public Invoker get() {
-        LOG.trace("producer.getSnakeJarInvoker({}) ", name);
-        return producer.getSnakeJarInvoker(name);
-      }
-    };*/
-    InvokerSupplier supplier = new InvokerSupplier(producer, name);
-    LOG.trace("********* [{}] snakeJarInvokerSupplier({})", supplier, name);
-    return supplier;
+    return () -> {
+      LOG.trace("producer.getSnakeJarInvoker({}) ", name);
+      return producer.getSnakeJarInvoker(name);
+    };
   }
 }

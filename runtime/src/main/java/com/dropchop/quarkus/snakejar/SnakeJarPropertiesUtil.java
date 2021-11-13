@@ -21,9 +21,7 @@ public class SnakeJarPropertiesUtil {
 
   private static void includeSnakeJarProperty(Config config, Properties snakeJarProperties, String prefix, String property) {
     Optional<String> value = config.getOptionalValue(property, String.class);
-    if (value.isPresent()) {
-      snakeJarProperties.setProperty(property.substring(prefix.length()), value.get());
-    }
+    value.ifPresent(s -> snakeJarProperties.setProperty(property.substring(prefix.length()), s));
   }
 
   private static Properties snakeJarProperties(String prefix) {

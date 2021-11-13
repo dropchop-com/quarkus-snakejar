@@ -53,25 +53,30 @@ public class SnakeJarInvokerFactory {
         try {
           Path path = Path.of(value);
           sources.add(new ModuleSource<>(name, () -> path));
+          LOG.info("Registering Invoker [{}] module [{}] source [{}]",
+            invokerName, name, path);
         } catch (InvalidPathException e) {
           LOG.warn("Got invalid module [{}] path [{}].", name, value, e);
         }
       } else {
         sources.add(new ModuleSource<>(name, () -> value));
+        LOG.info("Registering Invoker [{}] module [{}] source [{}].", invokerName, name, value);
       }
     }
     Invoker invoker;
     try {
       if (config.threadPool.isPresent()) {
         invoker = this.snakeJar.prep(config.threadPool.get(), new Invoker.Params(config.coreThreads, config.maxThreads), sources);
+        LOG.info("Compiled modules for Invoker [{}] on thread pool [{}].", invokerName, config.threadPool.get());
       } else {
         invoker = this.snakeJar.prep(new Invoker.Params(config.coreThreads, config.maxThreads), sources);
+        LOG.info("Compiled modules for Invoker [{}] on default thread pool.", invokerName);
       }
     } catch (Exception e) {
       LOG.warn("Unable to prepare Invoker [{}] for sources [{}]", invokerName, sources);
       return null;
     }
-    LOG.info("Registering Invoker [{}]", invokerName);
+    LOG.info("Registered Invoker [{}]", invokerName);
     return invoker;
   }
 
@@ -112,10 +117,10 @@ public class SnakeJarInvokerFactory {
 
   public void destroy() {
     if (!this.launchMode.isDevOrTest()) {
-      LOG.trace("Destroying snakes in the jar...");
+      LOG.info("Destroying snakes in the jar...");
       this.snakeJar.destroy();
       this.snakeJar.unload();
-      LOG.trace("Snakes are free.");
+      LOG.info("Snakes are free.");
     } else {
       LOG.trace("Skipping destroy in test or dev mode.");
     }

@@ -1,0 +1,46 @@
+####
+# This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode
+#
+# Before building the container image run:
+#
+# ./mvnw package -Pnative
+#
+# Then, build the image with:
+#
+# docker build -f src/main/docker/Dockerfile.native -t dropchop/snakejar-example .
+#
+# Then run the container using:
+#
+# docker run -i --rm -p 8080:8080 dropchop/snakejar-example
+#
+###
+FROM registry.access.redhat.com/ubi8/python-39
+USER root
+
+COPY model /work/model
+COPY requirements.txt /work/requirements.txt
+
+RUN chown 1001 /work \
+    && chmod "g+rwX" /work \
+    && chown -R 1001:root /work
+
+COPY --chown=1001:root target/*-runner /work/application
+
+WORKDIR /work
+EXPOSE 8080
+USER 1001
+
+RUN printf '#!/usr/bin/env sh\n\
+. "venv/bin/activate"\n\
+echo "Activated virtual environment..." \n\
+./application "$@"'\
+>> /work/application.sh
+
+RUN chmod +x /work/application.sh
+
+RUN python3.9 -m venv /work/venv
+RUN  . /work/venv/bin/activate \
+  && python3.9 -m pip install --upgrade pip \
+  && pip3.9 install -r /work/requirements.txt
+
+CMD ["./application.sh", "-Dquarkus.http.host=0.0.0.0"]

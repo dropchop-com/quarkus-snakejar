@@ -1,9 +1,19 @@
 # quarkus-snakejar
-Quarkus extension that integrates SnakeJar Java library with embedded CPython to Quarkus
+Quarkus extension that integrates [SnakeJar]((https://github.com/ivlcic/snakejar)) Java library with embedded CPython to Quarkus
 
-This extension enables calling Python native code from Quarkus REST services.
+This Quarkus extension enables calling Python native code from Quarkus REST services.
+
+```xml
+<dependency>
+  <groupId>com.dropchop.quarkus</groupId>
+  <artifactId>quarkus-snakejar</artifactId>
+  <version>1.0.4</version>
+</dependency>
+```
 
 ## Example
+
+Complete example can be found in snakejar-example sub project.
 
 REST Endpoint
 

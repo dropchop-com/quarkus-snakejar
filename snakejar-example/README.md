@@ -11,7 +11,7 @@ python3 -m pip install --upgrade pip
 pip3 install -r requirements.txt
 
 # to support native image compile directly on your platform
-# export JAVA_HOME=/usr/lib/jvm/java-11-graalvm
+# export JAVA_HOME=/usr/lib/jvm/java-17-graalvm
 
 #don't forget to execute on any new terminal
 source venv/bin/activate

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.0.5-SNAPSHOT</version>
+  <version>1.0.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Quarkus Snakejar - Parent</name>
   <description>Quarkus extension that integrates SnakeJar Java library with embedded CPython to Quarkus.
@@ -37,12 +37,12 @@
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <failsafe-plugin.version>${surefire-plugin.version}</failsafe-plugin.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus.version>2.3.0.Final</quarkus.version>
-    <snakejar.version>1.0.5</snakejar.version>
+    <quarkus.version>2.8.0.Final</quarkus.version>
+    <snakejar.version>1.0.7</snakejar.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <version.slf4j>1.7.32</version.slf4j>
   </properties>

@@ -7,7 +7,7 @@ This Quarkus extension enables calling Python native code from Quarkus REST serv
 <dependency>
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
 </dependency>
 ```
 

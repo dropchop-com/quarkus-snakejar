@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.dropchop.quarkus</groupId>
     <artifactId>quarkus-snakejar-parent</artifactId>
-    <version>1.0.14</version>
+    <version>1.0.15-SNAPSHOT</version>
   </parent>
   <artifactId>quarkus-snakejar</artifactId>
   <name>Quarkus Snakejar - Runtime</name>

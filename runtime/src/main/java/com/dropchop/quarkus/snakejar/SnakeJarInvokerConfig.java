@@ -15,25 +15,6 @@ import java.util.*;
 public class SnakeJarInvokerConfig {
 
   /**
-   * Number of always present threads in Invoker thread pool
-   */
-  @ConfigItem(defaultValue = "1")
-  public int coreThreads;
-
-  /**
-   * Maximum number of threads in Invoker thread pool
-   */
-  @ConfigItem(defaultValue = "1")
-  public int maxThreads;
-
-  /**
-   * Name of the Invoker thread pool
-   */
-  @ConfigItem
-  public Optional<String> threadPool;
-
-
-  /**
    * Order for module compilation
    */
   @ConfigItem

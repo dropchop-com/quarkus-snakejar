@@ -22,12 +22,11 @@ import java.util.*;
 public class SnakeJarInvokerFactory {
   private static final Logger LOG = LoggerFactory.getLogger(SnakeJarInvokerFactory.class);
   private static final String DEFAULT_INVOKER_NAME = "<<SnakeJarDefaultInvokerName>>";
-
   private final LaunchMode launchMode;
   private final SnakeJar snakeJar;
   private final Map<String, Invoker> namedInvokers;
 
-  private Invoker initInvoker(String invokerName, SnakeJarInvokerConfig config) {
+  private Invoker initInvoker(String invokerName, SnakeJarInvokersConfig invokersConfig, SnakeJarInvokerConfig config) {
     List<Source<?>> sources = new ArrayList<>();
     Map<String, SnakeJarInvokerConfig.Module> moduleMap = new LinkedHashMap<>();
     if (config.moduleOrder.isPresent() && !config.moduleOrder.get().isEmpty()) {
@@ -65,15 +64,17 @@ public class SnakeJarInvokerFactory {
     }
     Invoker invoker;
     try {
-      if (config.threadPool.isPresent()) {
-        invoker = this.snakeJar.prep(config.threadPool.get(), new Invoker.Params(config.coreThreads, config.maxThreads), sources);
-        LOG.info("Compiled modules for Invoker [{}] on thread pool [{}].", invokerName, config.threadPool.get());
+      if (invokersConfig.threadPoolName.isPresent()) {
+        LOG.debug("Compiling modules for Invoker [{}] on named thread pool [{}]...", invokerName, invokersConfig.threadPoolName.get());
+        invoker = this.snakeJar.prep(invokersConfig.threadPoolName.get(), sources);
+        LOG.info("Compiled modules for Invoker [{}] on named thread pool [{}].", invokerName, invokersConfig.threadPoolName.get());
       } else {
-        invoker = this.snakeJar.prep(new Invoker.Params(config.coreThreads, config.maxThreads), sources);
+        LOG.debug("Compiling modules for Invoker [{}] on default thread pool.", invokerName);
+        invoker = this.snakeJar.prep(sources);
         LOG.info("Compiled modules for Invoker [{}] on default thread pool.", invokerName);
       }
     } catch (Exception e) {
-      LOG.warn("Unable to prepare Invoker [{}] for sources [{}]", invokerName, sources);
+      LOG.warn("Unable to prepare Invoker [{}] for sources [{}]", invokerName, sources, e);
       return null;
     }
     LOG.info("Registered Invoker [{}]", invokerName);
@@ -86,10 +87,21 @@ public class SnakeJarInvokerFactory {
     this.launchMode = launchMode;
     this.snakeJar = SnakeJarFactory.get(invokersConfig.className);
     this.snakeJar.load();
-    this.snakeJar.initialize();
+    if (invokersConfig.threadPoolName.isPresent()) {
+      this.snakeJar.initialize(
+        new Invoker.Params(invokersConfig.threadPoolName.get(), invokersConfig.coreThreads, invokersConfig.maxThreads)
+      );
+      LOG.info("Initialized SnakeJar on named thread pool [{}].", invokersConfig.threadPoolName.get());
+    } else {
+      this.snakeJar.initialize(
+        new Invoker.Params(invokersConfig.coreThreads, invokersConfig.maxThreads)
+      );
+      LOG.info("Initialized SnakeJar on default thread pool name.");
+    }
+
 
     if (!invokersConfig.defaultInvoker.modules.isEmpty()) {
-      Invoker invoker = this.initInvoker(DEFAULT_INVOKER_NAME, invokersConfig.defaultInvoker);
+      Invoker invoker = this.initInvoker(DEFAULT_INVOKER_NAME, invokersConfig, invokersConfig.defaultInvoker);
       if (invoker != null) {
         this.namedInvokers.put(DEFAULT_INVOKER_NAME, invoker);
       }
@@ -99,7 +111,7 @@ public class SnakeJarInvokerFactory {
     for (Map.Entry<String, SnakeJarInvokerConfig> invokerConfigEntry : invokersConfig.namedInvokers.entrySet()) {
       String invokerName = invokerConfigEntry.getKey();
       SnakeJarInvokerConfig config = invokerConfigEntry.getValue();
-      Invoker invoker = this.initInvoker(invokerName, config);
+      Invoker invoker = this.initInvoker(invokerName, invokersConfig, config);
       if (invoker != null) {
         this.namedInvokers.put(invokerName, invoker);
       }
@@ -116,13 +128,13 @@ public class SnakeJarInvokerFactory {
   }
 
   public void destroy() {
-    if (!this.launchMode.isDevOrTest()) {
+    //if (!this.launchMode.isDevOrTest()) {
       LOG.info("Destroying snakes in the jar...");
       this.snakeJar.destroy();
       this.snakeJar.unload();
       LOG.info("Snakes are free.");
-    } else {
-      LOG.trace("Skipping destroy in test or dev mode.");
-    }
+    //} else {
+    //  LOG.trace("Skipping destroy in test or dev mode.");
+    //}
   }
 }

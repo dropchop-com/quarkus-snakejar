@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.1.2</version>
   <packaging>pom</packaging>
   <name>Quarkus Snakejar - Parent</name>
   <description>Quarkus extension that integrates SnakeJar Java library with embedded CPython to Quarkus.
@@ -31,7 +31,7 @@
     <connection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</connection>
     <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
     <url>https://github.com/ivlcic/quarkus-snakejar</url>
-    <tag>HEAD</tag>
+    <tag>1.1.2</tag>
   </scm>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>

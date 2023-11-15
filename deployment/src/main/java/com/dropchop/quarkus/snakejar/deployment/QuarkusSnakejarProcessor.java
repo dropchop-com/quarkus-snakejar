@@ -26,8 +26,8 @@ import org.jboss.jandex.IndexView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.inject.Default;
-import javax.inject.Singleton;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Singleton;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;

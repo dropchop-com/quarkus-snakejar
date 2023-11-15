@@ -4,8 +4,8 @@ import com.dropchop.snakejar.Invocation;
 import com.dropchop.snakejar.InvokeClass;
 import com.dropchop.snakejar.Invoker;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 

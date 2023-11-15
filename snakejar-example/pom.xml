@@ -48,7 +48,7 @@
     <dependency>
       <groupId>com.dropchop.quarkus</groupId>
       <artifactId>quarkus-snakejar</artifactId>
-      <version>1.35.2-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

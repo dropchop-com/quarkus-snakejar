@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.1.13-SNAPSHOT</version>
+  <version>1.35.1</version>
   <packaging>pom</packaging>
+
   <name>Quarkus Snakejar - Parent</name>
   <description>Quarkus extension that integrates SnakeJar Java library with embedded CPython to Quarkus.
     This extension enables calling Python native code from Quarkus REST services.</description>
+
   <url>https://github.com/ivlcic/quarkus-snakejar</url>
+
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
   <developers>
     <developer>
       <id>ivlcic</id>
@@ -22,17 +27,20 @@
       <email>nikola.ivacic@dropchop.com</email>
     </developer>
   </developers>
+
   <modules>
     <module>deployment</module>
     <module>runtime</module>
     <module>snakejar-example</module>
   </modules>
+
   <scm>
     <connection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</connection>
     <developerConnection>scm:git:https://github.com/ivlcic/quarkus-snakejar.git</developerConnection>
     <url>https://github.com/ivlcic/quarkus-snakejar</url>
-    <tag>HEAD</tag>
+    <tag>1.35.1</tag>
   </scm>
+
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <release-plugin.version>2.5.3</release-plugin.version>
@@ -47,11 +55,12 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus.version>2.14.0.Final</quarkus.version>
-    <snakejar.version>1.1.12</snakejar.version>
+    <quarkus.version>3.5.1</quarkus.version>
+    <snakejar.version>1.35.1</snakejar.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <version.slf4j>1.7.32</version.slf4j>
+    <version.slf4j>1.7.36</version.slf4j>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -73,6 +82,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -125,6 +135,7 @@
       </plugins>
     </pluginManagement>
   </build>
+
   <profiles>
     <profile>
       <id>maven-central</id>

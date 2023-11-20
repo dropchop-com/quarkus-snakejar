@@ -4,7 +4,7 @@
 
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.35.5-SNAPSHOT</version>
+  <version>1.35.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Quarkus Snakejar - Parent</name>
@@ -110,6 +110,7 @@
           <configuration>
             <systemPropertyVariables>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+              <!--suppress MavenModelInspection -->
               <maven.home>${maven.home}</maven.home>
               <maven.repo>${settings.localRepository}</maven.repo>
             </systemPropertyVariables>
@@ -121,6 +122,7 @@
           <configuration>
             <systemPropertyVariables>
               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+              <!--suppress MavenModelInspection -->
               <maven.home>${maven.home}</maven.home>
               <maven.repo>${settings.localRepository}</maven.repo>
             </systemPropertyVariables>

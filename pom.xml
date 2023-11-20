@@ -56,7 +56,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>3.5.2</quarkus.version>
-    <snakejar.version>1.35.2</snakejar.version>
+    <snakejar.version>1.35.3-SNAPSHOT</snakejar.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <version.slf4j>1.7.36</version.slf4j>
   </properties>

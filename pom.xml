@@ -4,7 +4,7 @@
 
   <groupId>com.dropchop.quarkus</groupId>
   <artifactId>quarkus-snakejar-parent</artifactId>
-  <version>1.35.5-SNAPSHOT</version>
+  <version>1.35.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Quarkus Snakejar - Parent</name>
@@ -147,6 +147,30 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc-plugin.version}</version>
+        <configuration>
+          <doclint>none</doclint>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>

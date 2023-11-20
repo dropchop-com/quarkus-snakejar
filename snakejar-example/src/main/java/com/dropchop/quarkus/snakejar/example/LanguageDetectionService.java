@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LanguageDetectionService
+ *
  * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 15. 11. 21.
  */
 @ApplicationScoped

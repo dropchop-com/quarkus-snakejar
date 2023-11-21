@@ -15,6 +15,11 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
+    <maven.deploy.skip>false</maven.deploy.skip>
+    <maven.javadoc.skip>false</maven.javadoc.skip>
+    <maven.install.skip>false</maven.install.skip>
+    <maven.source.skip>false</maven.source.skip>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

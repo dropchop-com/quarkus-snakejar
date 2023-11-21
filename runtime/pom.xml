@@ -10,6 +10,13 @@
   <artifactId>quarkus-snakejar</artifactId>
   <name>Quarkus Snakejar - Runtime</name>
 
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+    <maven.javadoc.skip>false</maven.javadoc.skip>
+    <maven.install.skip>false</maven.install.skip>
+    <maven.source.skip>false</maven.source.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>

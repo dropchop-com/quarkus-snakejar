@@ -75,7 +75,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <quarkus.version>3.5.2</quarkus.version>
-    <snakejar.version>1.35.6</snakejar.version>
+    <snakejar.version>1.35.7</snakejar.version>
 
     <version.slf4j>1.7.36</version.slf4j>
   </properties>
@@ -192,6 +192,7 @@
         <artifactId>flatten-maven-plugin</artifactId>
         <version>${flatten-plugin.version}</version>
         <configuration>
+          <flattenMode>oss</flattenMode>
         </configuration>
         <executions>
           <!-- enable flattening -->

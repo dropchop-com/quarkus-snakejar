@@ -53,6 +53,7 @@
     <install-plugin.version>3.1.1</install-plugin.version>
     <deploy-plugin.version>3.1.1</deploy-plugin.version>
     <release-plugin.version>3.0.1</release-plugin.version>
+    <flatten-plugin.version>1.5.0</flatten-plugin.version>
     <site-plugin.version>3.12.1</site-plugin.version>
     <project-info-reports-plugin.version>3.4.5</project-info-reports-plugin.version>
     <javadoc-plugin.version>3.6.2</javadoc-plugin.version>
@@ -74,7 +75,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <quarkus.version>3.5.2</quarkus.version>
-    <snakejar.version>1.35.5</snakejar.version>
+    <snakejar.version>1.35.6</snakejar.version>
 
     <version.slf4j>1.7.36</version.slf4j>
   </properties>
@@ -182,6 +183,31 @@
             <id>attach-javadocs</id>
             <goals>
               <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>${flatten-plugin.version}</version>
+        <configuration>
+        </configuration>
+        <executions>
+          <!-- enable flattening -->
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <!-- ensure proper cleanup -->
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
             </goals>
           </execution>
         </executions>

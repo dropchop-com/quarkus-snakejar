@@ -7,3 +7,4 @@ target/
 .gradle/
 .idea/
 **/__pycache__
+**/.flattened-pom.xml

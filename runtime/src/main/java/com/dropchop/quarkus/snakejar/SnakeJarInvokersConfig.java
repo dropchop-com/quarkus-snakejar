@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
 @ConfigMapping(prefix = "quarkus.snakejar")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)

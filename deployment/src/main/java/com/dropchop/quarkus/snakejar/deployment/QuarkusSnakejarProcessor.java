@@ -36,17 +36,12 @@ class QuarkusSnakejarProcessor {
 
   private static final Logger LOG = LoggerFactory.getLogger(QuarkusSnakejarProcessor.class);
   private static final String FEATURE = "quarkus-snakejar";
-  private static final DotName NAMED_SNAKEJAR_CLIENT_ANNOTATION = DotName.createSimple(NamedSnakeJarInvoker.class.getName());
+  private static final DotName NAMED_SNAKEJAR_CLIENT_ANNOTATION = DotName.createSimple(
+      NamedSnakeJarInvoker.class.getName()
+  );
 
   @BuildStep
-  void build(BuildProducer<FeatureBuildItem> feature,
-             BuildProducer<ReflectiveClassBuildItem> reflectiveClasses,
-             BuildProducer<JniRuntimeAccessBuildItem> jniRuntimeAccessibleClasses,
-             BuildProducer<RuntimeReinitializedClassBuildItem> reinitialized,
-             BuildProducer<NativeImageResourceBuildItem> nativeLibs,
-             LaunchModeBuildItem launchMode,
-             NativeConfig config) throws IOException {
-
+  void build(BuildProducer<FeatureBuildItem> feature) {
     LOG.debug("build start");
     feature.produce(new FeatureBuildItem(FEATURE));
     LOG.debug("build end");

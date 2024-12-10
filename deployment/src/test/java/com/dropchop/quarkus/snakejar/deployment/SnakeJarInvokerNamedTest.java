@@ -14,8 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 7. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 7. 11. 21.
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 public class SnakeJarInvokerNamedTest {
   @RegisterExtension
   static final QuarkusUnitTest config = new QuarkusUnitTest()

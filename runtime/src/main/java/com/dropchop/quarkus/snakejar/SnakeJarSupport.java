@@ -3,8 +3,9 @@ package com.dropchop.quarkus.snakejar;
 import java.util.Properties;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
+@SuppressWarnings({"ClassCanBeRecord", "unused"})
 public class SnakeJarSupport {
 
   private final Properties properties;

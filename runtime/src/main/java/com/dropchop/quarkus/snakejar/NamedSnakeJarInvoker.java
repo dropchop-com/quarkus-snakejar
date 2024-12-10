@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)

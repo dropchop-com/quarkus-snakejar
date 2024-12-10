@@ -12,15 +12,19 @@ import java.util.Map;
 /**
  * LanguageDetectionService
  *
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 15. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 15. 11. 21.
  */
 @ApplicationScoped
+@SuppressWarnings("CdiInjectionPointsInspection")
 public class LanguageDetectionService {
 
   public static class InvokeLangIdClass extends InvokeClass<HashMap<String, Double>> {
     @SuppressWarnings("unchecked")
     public InvokeLangIdClass() {
-      super("lang_detect", "lang_id", "LanguageDetect", (Class<HashMap<String, Double>>)(Class<?>)HashMap.class);
+      super(
+          "lang_detect", "lang_id", "LanguageDetect",
+          (Class<HashMap<String, Double>>)(Class<?>)HashMap.class
+      );
     }
   }
 
@@ -29,6 +33,7 @@ public class LanguageDetectionService {
   @Inject
   Invoker invoker;
 
+  @SuppressWarnings("UnnecessaryLocalVariable")
   public Map<String, Double> detectLanguage(String text, int numRet) throws Exception {
     Map<String, Double> result = invoker.apply(LANG_ID_CLASS,
       () -> new Object[]{

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Example service
  *
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 15. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 15. 11. 21.
  */
 @Path("/example")
 public class Example {

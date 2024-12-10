@@ -4,7 +4,7 @@ import com.dropchop.snakejar.Invocation;
 import com.dropchop.snakejar.InvokeFunction;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 9. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 9. 11. 21.
  */
 public class TestFuncs {
 

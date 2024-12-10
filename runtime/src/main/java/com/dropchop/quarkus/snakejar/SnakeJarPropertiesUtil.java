@@ -8,8 +8,9 @@ import java.util.Optional;
 import java.util.Properties;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
+@SuppressWarnings("unused")
 public class SnakeJarPropertiesUtil {
 
   private static final String SNAKEJAR_OPTION_PREFIX = "snakejar.";
@@ -19,7 +20,8 @@ public class SnakeJarPropertiesUtil {
     return property.startsWith(prefix);
   }
 
-  private static void includeSnakeJarProperty(Config config, Properties snakeJarProperties, String prefix, String property) {
+  private static void includeSnakeJarProperty(Config config, Properties snakeJarProperties,
+                                              String prefix, String property) {
     Optional<String> value = config.getOptionalValue(property, String.class);
     value.ifPresent(s -> snakeJarProperties.setProperty(property.substring(prefix.length()), s));
   }

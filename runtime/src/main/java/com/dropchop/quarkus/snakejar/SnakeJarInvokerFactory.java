@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
+ * @author Nikola Ivačič <nikola.ivacic@dropchop.com> on 6. 11. 21.
  */
 @Singleton
 public class SnakeJarInvokerFactory {
@@ -28,7 +28,8 @@ public class SnakeJarInvokerFactory {
   private final SnakeJar snakeJar;
   private final Map<String, Invoker> namedInvokers;
 
-  private Invoker initInvoker(String invokerName, SnakeJarInvokersConfig invokersConfig, SnakeJarInvokerConfig config) {
+  private Invoker initInvoker(String invokerName, SnakeJarInvokersConfig invokersConfig,
+                              SnakeJarInvokerConfig config) {
     List<Source<?>> sources = new ArrayList<>();
     Map<String, Module> moduleMap = new LinkedHashMap<>();
     if (config.moduleOrder().isPresent() && !config.moduleOrder().get().isEmpty()) {
@@ -36,7 +37,7 @@ public class SnakeJarInvokerFactory {
         moduleName = moduleName.trim();
         Module module = config.modules().get(moduleName);
         if (module == null) {
-          LOG.warn("Unbale to find module with name [{}]! Check your configuration!", moduleName);
+          LOG.warn("Unable to find module with name [{}]! Check your configuration!", moduleName);
         } else {
           moduleMap.put(moduleName, config.modules().get(moduleName));
         }

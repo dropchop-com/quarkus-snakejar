@@ -1,58 +1,91 @@
 package com.dropchop.quarkus.snakejar;
 
 import io.quarkus.runtime.annotations.*;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithParentName;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 /**
  * @author Nikola Ivačič <nikola.ivacic@dropchop.org> on 6. 11. 21.
  */
-@ConfigRoot(name = "snakejar", phase = ConfigPhase.RUN_TIME)
-public class SnakeJarInvokersConfig {
+@ConfigMapping(prefix = "quarkus.snakejar")
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+public interface SnakeJarInvokersConfig {
 
   /**
    * Log level configuration for JNI c library
    */
-  @ConfigItem(defaultValue = "error")
-  public String logLevel;
+  @WithDefault("error")
+  String logLevel();
 
   /**
    * SnakeJar implementation class
    */
-  @ConfigItem(defaultValue = "com.dropchop.snakejar.impl.SnakeJarEmbedded")
-  public String className;
+  @WithDefault("com.dropchop.snakejar.impl.SnakeJarEmbedded")
+  String className();
 
   /**
    * Number of always present threads in Invoker thread pool
    */
-  @ConfigItem(defaultValue = "1")
-  public int coreThreads;
+  @WithDefault("1")
+  int coreThreads();
 
   /**
    * Maximum number of threads in Invoker thread pool
    */
-  @ConfigItem(defaultValue = "1")
-  public int maxThreads;
+  @WithDefault("1")
+  int maxThreads();
 
   /**
    * Name of the thread pool for Invokers to run.
    */
-  @ConfigItem()
-  public Optional<String> threadPoolName;
+  Optional<String> threadPoolName();
+
+
+  interface SnakeJarInvokerConfig {
+
+    /**
+     * Order for module compilation
+     */
+    Optional<List<String>> moduleOrder();
+
+    /**
+     * Configuration for python modules
+     */
+    @ConfigDocMapKey("module-name")
+    @ConfigDocSection
+    Map<String, Module> modules();
+
+    /**
+     * Configuration for python module
+     */
+    @ConfigGroup
+    interface Module {
+
+      /**
+       * Configuration for python module source
+       */
+      String source();
+    }
+  }
+
 
   /**
    * The default SnakeJar invoker.
    */
-  @ConfigItem(name = ConfigItem.PARENT)
-  public SnakeJarInvokerConfig defaultInvoker;
+  @WithParentName
+  SnakeJarInvokerConfig defaultInvoker();
 
   /**
    * Additional named SnakeJar invokers.
    */
   @ConfigDocSection
   @ConfigDocMapKey("invoker-name")
-  @ConfigItem(name = ConfigItem.PARENT)
-  public Map<String, SnakeJarInvokerConfig> namedInvokers;
+  @WithParentName
+  Map<String, SnakeJarInvokerConfig> namedInvokers();
 
 }

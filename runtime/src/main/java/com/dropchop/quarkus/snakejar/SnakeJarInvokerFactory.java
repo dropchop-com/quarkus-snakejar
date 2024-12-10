@@ -1,5 +1,7 @@
 package com.dropchop.quarkus.snakejar;
 
+import com.dropchop.quarkus.snakejar.SnakeJarInvokersConfig.SnakeJarInvokerConfig;
+import com.dropchop.quarkus.snakejar.SnakeJarInvokersConfig.SnakeJarInvokerConfig.Module;
 import com.dropchop.snakejar.Invoker;
 import com.dropchop.snakejar.ModuleSource;
 import com.dropchop.snakejar.SnakeJar;
@@ -28,23 +30,23 @@ public class SnakeJarInvokerFactory {
 
   private Invoker initInvoker(String invokerName, SnakeJarInvokersConfig invokersConfig, SnakeJarInvokerConfig config) {
     List<Source<?>> sources = new ArrayList<>();
-    Map<String, SnakeJarInvokerConfig.Module> moduleMap = new LinkedHashMap<>();
-    if (config.moduleOrder.isPresent() && !config.moduleOrder.get().isEmpty()) {
-      for (String moduleName : config.moduleOrder.get()) {
+    Map<String, Module> moduleMap = new LinkedHashMap<>();
+    if (config.moduleOrder().isPresent() && !config.moduleOrder().get().isEmpty()) {
+      for (String moduleName : config.moduleOrder().get()) {
         moduleName = moduleName.trim();
-        SnakeJarInvokerConfig.Module module = config.modules.get(moduleName);
+        Module module = config.modules().get(moduleName);
         if (module == null) {
           LOG.warn("Unbale to find module with name [{}]! Check your configuration!", moduleName);
         } else {
-          moduleMap.put(moduleName, config.modules.get(moduleName));
+          moduleMap.put(moduleName, config.modules().get(moduleName));
         }
       }
     } else {
-      moduleMap.putAll(config.modules);
+      moduleMap.putAll(config.modules());
     }
-    for (Map.Entry<String, SnakeJarInvokerConfig.Module> moduleEntry : moduleMap.entrySet()) {
+    for (Map.Entry<String, Module> moduleEntry : moduleMap.entrySet()) {
       String name = moduleEntry.getKey();
-      String value = moduleEntry.getValue().source;
+      String value = moduleEntry.getValue().source();
       if (
         !value.toLowerCase().startsWith("classpath://") &&
         (value.contains(FileSystems.getDefault().getSeparator()) || value.toLowerCase().endsWith(".py"))
@@ -64,10 +66,16 @@ public class SnakeJarInvokerFactory {
     }
     Invoker invoker;
     try {
-      if (invokersConfig.threadPoolName.isPresent()) {
-        LOG.debug("Compiling modules for Invoker [{}] on named thread pool [{}]...", invokerName, invokersConfig.threadPoolName.get());
-        invoker = this.snakeJar.prep(invokersConfig.threadPoolName.get(), sources);
-        LOG.info("Compiled modules for Invoker [{}] on named thread pool [{}].", invokerName, invokersConfig.threadPoolName.get());
+      if (invokersConfig.threadPoolName().isPresent()) {
+        LOG.debug(
+            "Compiling modules for Invoker [{}] on named thread pool [{}]...",
+            invokerName, invokersConfig.threadPoolName().get()
+        );
+        invoker = this.snakeJar.prep(invokersConfig.threadPoolName().get(), sources);
+        LOG.info(
+            "Compiled modules for Invoker [{}] on named thread pool [{}].",
+            invokerName, invokersConfig.threadPoolName().get()
+        );
       } else {
         LOG.debug("Compiling modules for Invoker [{}] on default thread pool.", invokerName);
         invoker = this.snakeJar.prep(sources);
@@ -85,30 +93,32 @@ public class SnakeJarInvokerFactory {
     LOG.trace("SnakeJarInvokerFactory({}, {})", invokersConfig, launchMode);
     this.namedInvokers = new HashMap<>();
     this.launchMode = launchMode;
-    this.snakeJar = SnakeJarFactory.get(invokersConfig.className);
+    this.snakeJar = SnakeJarFactory.get(invokersConfig.className());
     this.snakeJar.load();
-    if (invokersConfig.threadPoolName.isPresent()) {
+    if (invokersConfig.threadPoolName().isPresent()) {
       this.snakeJar.initialize(
-        new Invoker.Params(invokersConfig.threadPoolName.get(), invokersConfig.coreThreads, invokersConfig.maxThreads)
+        new Invoker.Params(
+            invokersConfig.threadPoolName().get(), invokersConfig.coreThreads(), invokersConfig.maxThreads()
+        )
       );
-      LOG.info("Initialized SnakeJar on named thread pool [{}].", invokersConfig.threadPoolName.get());
+      LOG.info("Initialized SnakeJar on named thread pool [{}].", invokersConfig.threadPoolName().get());
     } else {
       this.snakeJar.initialize(
-        new Invoker.Params(invokersConfig.coreThreads, invokersConfig.maxThreads)
+        new Invoker.Params(invokersConfig.coreThreads(), invokersConfig.maxThreads())
       );
       LOG.info("Initialized SnakeJar on default thread pool name.");
     }
 
 
-    if (!invokersConfig.defaultInvoker.modules.isEmpty()) {
-      Invoker invoker = this.initInvoker(DEFAULT_INVOKER_NAME, invokersConfig, invokersConfig.defaultInvoker);
+    if (!invokersConfig.defaultInvoker().modules().isEmpty()) {
+      Invoker invoker = this.initInvoker(DEFAULT_INVOKER_NAME, invokersConfig, invokersConfig.defaultInvoker());
       if (invoker != null) {
         this.namedInvokers.put(DEFAULT_INVOKER_NAME, invoker);
       }
     } else {
       LOG.warn("Skipping creation of default SnakeJar Invoker since it has no Python modules configured.");
     }
-    for (Map.Entry<String, SnakeJarInvokerConfig> invokerConfigEntry : invokersConfig.namedInvokers.entrySet()) {
+    for (Map.Entry<String, SnakeJarInvokerConfig> invokerConfigEntry : invokersConfig.namedInvokers().entrySet()) {
       String invokerName = invokerConfigEntry.getKey();
       SnakeJarInvokerConfig config = invokerConfigEntry.getValue();
       Invoker invoker = this.initInvoker(invokerName, invokersConfig, config);

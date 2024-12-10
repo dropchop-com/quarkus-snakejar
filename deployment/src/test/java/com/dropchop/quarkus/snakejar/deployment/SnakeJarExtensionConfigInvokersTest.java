@@ -28,10 +28,10 @@ public class SnakeJarExtensionConfigInvokersTest {
 
   @Test
   public void testSnakeJarMinimalConfig() {
-    assertEquals("com.dropchop.snakejar.impl.SnakeJarEmbedded", invokersConfig.className);
-    assertEquals("debug", invokersConfig.logLevel);
-    assertNotNull(invokersConfig.defaultInvoker);
-    assertNotNull(invokersConfig.namedInvokers);
-    assertEquals(1, invokersConfig.namedInvokers.size());
+    assertEquals("com.dropchop.snakejar.impl.SnakeJarEmbedded", invokersConfig.className());
+    assertEquals("debug", invokersConfig.logLevel());
+    assertNotNull(invokersConfig.defaultInvoker());
+    assertNotNull(invokersConfig.namedInvokers());
+    assertEquals(1, invokersConfig.namedInvokers().size());
   }
 }
